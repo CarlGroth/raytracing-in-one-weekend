@@ -1,5 +1,5 @@
 use crate::Vec3;
-use crate::{HitableList, Hitable};
+use crate::{HittableList, Hittable};
 
 #[derive(Copy, Clone, Debug)]
 pub struct Ray {
@@ -19,7 +19,7 @@ impl Ray {
     }
 }
 
-pub fn color(r: Ray, world: &HitableList, depth: i32) -> Vec3 {
+pub fn color(r: Ray, world: &HittableList, depth: i32) -> Vec3 {
     match world.hit(&r, 0.001, std::f32::MAX) {
         Some(res) => {
             let mut scattered = Ray::new();

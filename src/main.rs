@@ -16,11 +16,11 @@ use ray::{
     color
 };
 
-mod hitable;
-use hitable::{
-    HitableList,
+mod hittable;
+use hittable::{
+    HittableList,
     HitRecord,
-    Hitable
+    Hittable
 };
 
 mod materials;

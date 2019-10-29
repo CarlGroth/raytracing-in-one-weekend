@@ -1,12 +1,12 @@
 use crate::Vec3;
 use crate::{Lambertian, Sphere, Dielectic, Metal};
-use crate::HitableList;
+use crate::HittableList;
 use std::sync::Arc;
 use crate::nrand;
 
-pub fn gen_cover() -> HitableList {
+pub fn gen_cover() -> HittableList {
     let n = 500;
-    let mut list = HitableList::new(n+1);
+    let mut list = HittableList::new(n+1);
 
     list.add(Box::new(Sphere{center: Vec3::new(0.0, -1000.0, 0.0), radius: 1000.0, material: Arc::new(Lambertian::new(Vec3::new(0.5, 0.5, 0.5)))}));
     for a in -11..11 {
