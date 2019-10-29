@@ -55,10 +55,6 @@ impl Metal {
     }
 }
 
-fn reflect(v: Vec3, n: Vec3) -> Vec3 {
-    v - n * Vec3::dot(&v, &n) * 2.0
-}
-
 impl Material for Metal {
     fn scatter(
         &self,
@@ -87,6 +83,9 @@ impl Dielectic {
     }
 }
 
+fn reflect(v: Vec3, n: Vec3) -> Vec3 {
+    v - n * Vec3::dot(&v, &n) * 2.0
+}
 fn schlick(cosine: f32, ref_idx: f32) -> f32 {
     let mut r0 = (1.0 - ref_idx) / (1.0 + ref_idx);
     r0 = r0 * r0;
