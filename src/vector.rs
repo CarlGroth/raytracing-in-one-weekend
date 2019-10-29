@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub, Mul, Neg, Div, AddAssign, SubAssign, MulAssign, DivAssign};
+use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[derive(Copy, Clone, Debug)]
 pub struct Vec3 {
@@ -13,11 +13,11 @@ impl Vec3 {
     }
 
     pub fn from_one(v: f32) -> Vec3 {
-        Vec3 { x: v, y: v, z: v}
+        Vec3 { x: v, y: v, z: v }
     }
 
     pub fn from_twin(a: f32, b: f32) -> Vec3 {
-        Vec3 { x: a, y: b, z: 0.0}
+        Vec3 { x: a, y: b, z: 0.0 }
     }
 
     pub fn new(a: f32, b: f32, c: f32) -> Vec3 {
@@ -39,9 +39,9 @@ impl Vec3 {
     pub fn normalize(&self) -> Vec3 {
         let inv_len = self.length().recip();
         Vec3 {
-            x : self.x * inv_len,
-            y : self.y * inv_len,
-            z : self.z * inv_len,
+            x: self.x * inv_len,
+            y: self.y * inv_len,
+            z: self.z * inv_len,
         }
     }
 
@@ -70,7 +70,6 @@ impl Add for Vec3 {
     }
 }
 
-
 impl Div<f32> for Vec3 {
     type Output = Vec3;
 
@@ -82,7 +81,6 @@ impl Div<f32> for Vec3 {
         }
     }
 }
-
 
 impl Sub for Vec3 {
     type Output = Vec3;
@@ -187,4 +185,3 @@ impl MulAssign<f32> for Vec3 {
         self.z *= other;
     }
 }
-

@@ -1,7 +1,7 @@
-use crate::Ray;
-use crate::Vec3;
-use crate::Sphere;
 use crate::Material;
+use crate::Ray;
+use crate::Sphere;
+use crate::Vec3;
 use std::sync::Arc;
 
 pub struct HittableList {
@@ -27,12 +27,9 @@ impl Hittable for HittableList {
 
         for i in &self.objects {
             let temp = i.hit(r, t_min, closest_so_far);
-            match temp {
-                Some(rec) => {
-                    closest_so_far = rec.t;
-                    hit_anything = Some(rec);
-                },
-                None => {},
+            if let Some(rec) = temp {
+                closest_so_far = rec.t;
+                hit_anything = Some(rec);
             }
         }
         hit_anything
@@ -59,17 +56,27 @@ impl Hittable for Sphere {
         let discriminant = b * b - a * c;
 
         if discriminant > 0.0 {
-            let temp = ( -b - (b*b - a*c).sqrt() ) / a;
+            let temp = (-b - (b * b - a * c).sqrt()) / a;
             if temp < t_max && temp > t_min {
-                let p = r.point_at_parameter(temp);
-                return Some(HitRecord{t: temp, p: p, normal: (p - self.center) / self.radius, material: Arc::clone(&self.material)});
+                let point = r.point_at_parameter(temp);
+                return Some(HitRecord {
+                    t: temp,
+                    p: point,
+                    normal: (point - self.center) / self.radius,
+                    material: Arc::clone(&self.material),
+                });
             }
-            let temp = (-b + (b*b - a*c).sqrt()) / a;
+            let temp = (-b + (b * b - a * c).sqrt()) / a;
             if temp < t_max && temp > t_min {
-                let p = r.point_at_parameter(temp);
-                return Some(HitRecord{t: temp, p: p, normal: (p - self.center) / self.radius, material: Arc::clone(&self.material)});
+                let point = r.point_at_parameter(temp);
+                return Some(HitRecord {
+                    t: temp,
+                    p: point,
+                    normal: (point - self.center) / self.radius,
+                    material: Arc::clone(&self.material),
+                });
             }
         }
-        return None;
+        None
     }
 }

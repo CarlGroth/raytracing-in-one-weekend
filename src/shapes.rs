@@ -1,6 +1,6 @@
+use crate::Material;
 use crate::Vec3;
 use std::sync::Arc;
-use crate::Material;
 
 pub struct Sphere {
     pub center: Vec3,
